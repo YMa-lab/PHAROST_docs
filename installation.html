@@ -19,7 +19,6 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tutorial" href="tutorial.html" />
     <link rel="prev" title="PHAROST Documentation" href="index.html" /> 
 </head>
 
@@ -43,17 +42,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#clone-the-repository">1. Clone the repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-conda-environment">2. Create conda environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-pytorch-geometric">3. Install PyTorch Geometric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-jupyter-notebook">4. (Optional) Jupyter Notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#verify-installation-of-pytorch-packages">5. Verify installation of pytorch packages</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
 </ul>
 
         </div>
@@ -82,36 +71,27 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<section id="clone-the-repository">
-<h2>1. Clone the repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h2>
+<p><strong>1. Clone the repository</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YMa-lab/PHAROST.git
 <span class="nb">cd</span><span class="w"> </span>PHAROST
 </pre></div>
 </div>
-</section>
-<section id="create-conda-environment">
-<h2>2. Create conda environment<a class="headerlink" href="#create-conda-environment" title="Link to this heading"></a></h2>
+<p><strong>2. Create conda environment</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
-conda<span class="w"> </span>activate<span class="w"> </span>PHAROST
+conda<span class="w"> </span>activate<span class="w"> </span>PHAROST_env
 </pre></div>
 </div>
-</section>
-<section id="install-pytorch-geometric">
-<h2>3. Install PyTorch Geometric<a class="headerlink" href="#install-pytorch-geometric" title="Link to this heading"></a></h2>
+<p><strong>3. Install PyTorch Geometric</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>torch-scatter<span class="w"> </span>torch-sparse<span class="w"> </span>torch-cluster<span class="w"> </span>torch-spline-conv<span class="w"> </span>torch-geometric<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-f<span class="w"> </span>https://data.pyg.org/whl/torch-2.8.0+cu128.html
 </pre></div>
 </div>
-</section>
-<section id="optional-jupyter-notebook">
-<h2>4. (Optional) Jupyter Notebook<a class="headerlink" href="#optional-jupyter-notebook" title="Link to this heading"></a></h2>
+<p><strong>4. (Optional) Jupyter Notebook</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>anaconda<span class="w"> </span>ipykernel
-python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>PHAROST<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (PHAROST)&quot;</span>
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>PHAROST_env
 </pre></div>
 </div>
-</section>
-<section id="verify-installation-of-pytorch-packages">
-<h2>5. Verify installation of pytorch packages<a class="headerlink" href="#verify-installation-of-pytorch-packages" title="Link to this heading"></a></h2>
+<p><strong>5. Verify installation of pytorch packages</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
@@ -120,14 +100,12 @@ python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"
 </pre></div>
 </div>
 </section>
-</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="PHAROST Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
