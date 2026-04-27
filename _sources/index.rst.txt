@@ -3,7 +3,7 @@ PHAROST Documentation
 
 PHAROST is a deep transfer learning framework for pharmacogenomic outcome prediction in spatial transcriptomics.
 
-.. image:: ../figures/Fig1.png
+.. image:: _static/Fig1.png
    :align: center
    :width: 700
 
