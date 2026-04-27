@@ -30,3 +30,7 @@ exclude_patterns = []
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ['_static']
+
+html_theme_options = {
+    "style_nav_header_background": "#A3E4E1",  # 你可以换成任意颜色
+}
