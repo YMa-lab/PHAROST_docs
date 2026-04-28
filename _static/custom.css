@@ -1,0 +1,19 @@
+/* 正文文字 */
+body {
+    color: #2C3E50;
+}
+
+/* 标题 */
+h1, h2, h3, h4 {
+    color: #1A1A1A;
+}
+
+/* 链接 */
+a {
+    color: #44CEC0;
+}
+
+/* hover */
+a:hover {
+    color: #A5D4DF;
+}
