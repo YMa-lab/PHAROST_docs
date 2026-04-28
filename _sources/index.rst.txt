@@ -16,7 +16,7 @@ Getting Started
    :maxdepth: 2
 
    installation
-   quickstart
+   
 
 ---
 
@@ -26,8 +26,8 @@ User Guide
 .. toctree::
    :maxdepth: 2
 
-   tutorial
-   data
+   Data
+   TutorialBC
 
 ---
 
