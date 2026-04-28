@@ -12,6 +12,7 @@ conda env create -f environment.yml
 # Activate the environment
 conda activate PHAROST_env
 ```
+Installation should take between less than 15 minutes on a standard desktop.
 
 ***Install PyTorch Geometric*** 
 
