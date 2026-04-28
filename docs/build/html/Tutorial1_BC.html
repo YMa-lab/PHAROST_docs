@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial 1 — Breast Cancer (Xenium Rep1) &mdash; PHAROST 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Datasets" href="Data.html" />
+    <link rel="prev" title="Environment Setup" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #A3E4E1" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PHAROST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Environment Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial 1 — Breast Cancer (Xenium Rep1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#model-training">Model Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#train-per-drug">Train per drug</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#downstream-analysis">Downstream Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-setup">Plotting setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cell-type-spatial-map">Cell-type spatial map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drug-response-spatial-maps">Drug-response spatial maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#marker-gene-drug-response-dotplot">Marker-gene + drug-response dotplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensitive-cell-proportion-per-cell-type">Sensitive-cell proportion per cell type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drug-gene-spearman-correlation">Drug × gene Spearman correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bivariate-spatial-coexpression-gene-drug">Bivariate spatial coexpression: gene × drug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bivariate-spatial-coexpression-gene-gene">Bivariate spatial coexpression: gene × gene</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Data.html">Datasets</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">PHAROST API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #A3E4E1" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PHAROST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial 1 — Breast Cancer (Xenium Rep1)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Tutorial1_BC.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial-1-breast-cancer-xenium-rep1">
+<h1>Tutorial 1 — Breast Cancer (Xenium Rep1)<a class="headerlink" href="#tutorial-1-breast-cancer-xenium-rep1" title="Permalink to this heading"></a></h1>
+<p>Train PHAROST on bulk RNA-Seq labels + 10x Xenium spatial transcriptomics for three drugs, then run downstream analyses on the predicted cell-resolved drug-response scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pharost</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="model-training">
+<h2>Model Training<a class="headerlink" href="#model-training" title="Permalink to this heading"></a></h2>
+<p>Train one PHAROST model per drug. Bulk RNA-Seq is the source domain (with
+known sensitive/resistant labels), spatial transcriptomics is the target
+domain. Domain alignment is enforced by LMMD + CORAL losses on the latent
+representations.</p>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<p>Hyperparameters and input file locations. The bulk drug-response label CSV
+(<code class="docutils literal notranslate"><span class="pre">ALL_label_harmonized.csv</span></code>) provides the per-cell-line sensitivity labels;
+per-drug subsets are written to <code class="docutils literal notranslate"><span class="pre">Selected_drug/{drug}.csv</span></code> on first use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">selected_drugs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LAPATINIB&#39;</span><span class="p">,</span> <span class="s1">&#39;AFATINIB&#39;</span><span class="p">,</span> <span class="s1">&#39;TAMOXIFEN&#39;</span><span class="p">]</span>
+
+<span class="n">file_dir</span> <span class="o">=</span> <span class="s1">&#39;data/Xenium_BreastCancer_Processed&#39;</span>
+<span class="n">result_dir</span> <span class="o">=</span> <span class="s1">&#39;BC_result&#39;</span>
+<span class="n">response_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_dir</span><span class="si">}</span><span class="s1">/Selected_drug&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">response_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">drug_response</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/Preprocessed_Bulk_All/ALL_label_harmonized.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-per-drug">
+<h3>Train per drug<a class="headerlink" href="#train-per-drug" title="Permalink to this heading"></a></h3>
+<p>For each drug we (i) cache its label column, then (ii) call <code class="docutils literal notranslate"><span class="pre">pharost.train</span></code>
+end-to-end. Each run writes the trained model, predicted probabilities, and
+a full training log to <code class="docutils literal notranslate"><span class="pre">BC_result/{drug}/</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">drug</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">selected_drugs</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Processing drugs&quot;</span><span class="p">):</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
+
+    <span class="n">response_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">response_dir</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">drug</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">response_filename</span><span class="p">):</span>
+        <span class="n">drug_response</span><span class="p">[[</span><span class="n">drug</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">response_filename</span><span class="p">)</span>
+
+    <span class="n">pharost</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+        <span class="n">p_bulk_gene_exp</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_dir</span><span class="si">}</span><span class="s1">/bulk_exp_processed.csv&#39;</span><span class="p">,</span>
+        <span class="n">p_bulk_label</span><span class="o">=</span><span class="n">response_filename</span><span class="p">,</span>
+        <span class="n">p_adata</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_dir</span><span class="si">}</span><span class="s1">/breast_rep1_preprocessed.h5ad&#39;</span><span class="p">,</span>
+        <span class="n">out_dir</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">drug</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing drugs: 100%|██████████| 3/3 [11:01&lt;00:00, 220.67s/it]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="downstream-analysis">
+<h2>Downstream Analysis<a class="headerlink" href="#downstream-analysis" title="Permalink to this heading"></a></h2>
+<p>Load predictions back into <code class="docutils literal notranslate"><span class="pre">adata.obs</span></code> and explore cell-type-resolved
+drug-response patterns: spatial maps, per-celltype proportions,
+gene-correlations, and bivariate spatial coexpression plots.</p>
+<section id="plotting-setup">
+<h3>Plotting setup<a class="headerlink" href="#plotting-setup" title="Permalink to this heading"></a></h3>
+<p>Editable PDF text (<code class="docutils literal notranslate"><span class="pre">fonttype=42</span></code>) and global scanpy figure params.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
+
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;pdf.fonttype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;ps.fonttype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi_save</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;eps&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cell-type-spatial-map">
+<h3>Cell-type spatial map<a class="headerlink" href="#cell-type-spatial-map" title="Permalink to this heading"></a></h3>
+<p>Load the spatial AnnData and color each cell by its annotated cell type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">celltype_palette</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;B_Cells&#39;</span><span class="p">:</span> <span class="s1">&#39;#42A5F5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CD8+_T_Cells&#39;</span><span class="p">:</span> <span class="s1">&#39;#26C6DA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CD4+_T_Cells&#39;</span><span class="p">:</span> <span class="s1">&#39;#4DB6AC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DCIS_1&#39;</span><span class="p">:</span> <span class="s1">&#39;#E57373&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DCIS_2&#39;</span><span class="p">:</span> <span class="s1">&#39;#FF9800&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Endothelial&#39;</span><span class="p">:</span> <span class="s1">&#39;#7E57C2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IRF7+_DCs&#39;</span><span class="p">:</span> <span class="s1">&#39;#FFD54F&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Invasive_Tumor&#39;</span><span class="p">:</span> <span class="s1">&#39;#FFF176&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LAMP3+_DCs&#39;</span><span class="p">:</span> <span class="s1">&#39;#558B2F&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Macrophages_1&#39;</span><span class="p">:</span> <span class="s1">&#39;#7CB342&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Macrophages_2&#39;</span><span class="p">:</span> <span class="s1">&#39;#9CCC65&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Mast_Cells&#39;</span><span class="p">:</span> <span class="s1">&#39;#81C784&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Myoepi_ACTA2+&#39;</span><span class="p">:</span> <span class="s1">&#39;#C0CA33&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Myoepi_KRT15+&#39;</span><span class="p">:</span> <span class="s1">&#39;#D4E157&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Perivascular-Like&#39;</span><span class="p">:</span> <span class="s1">&#39;#7986CB&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Prolif_Invasive_Tumor&#39;</span><span class="p">:</span> <span class="s1">&#39;#5C6BC0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Stromal&#39;</span><span class="p">:</span> <span class="s1">&#39;#26A69A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Stromal_&amp;_T_Cell_Hybrid&#39;</span><span class="p">:</span> <span class="s1">&#39;#80CBC4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;T_Cell_&amp;_Tumor_Hybrid&#39;</span><span class="p">:</span> <span class="s1">&#39;#FBC02D&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Unlabeled&#39;</span><span class="p">:</span> <span class="s1">&#39;#757575&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">file_dir</span><span class="si">}</span><span class="s1">/breast_rep1_preprocessed.h5ad&#39;</span><span class="p">)</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;celltype&#39;</span><span class="p">,</span>
+    <span class="n">spot_size</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="n">celltype_palette</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Cell Types (Rep1)&#39;</span><span class="p">,</span>
+    <span class="n">legend_loc</span><span class="o">=</span><span class="s1">&#39;right margin&#39;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3264f02b62deaada8134ce5c020f21c14a06a4a2ed288accf08fbaae4a733699.png" src="_images/3264f02b62deaada8134ce5c020f21c14a06a4a2ed288accf08fbaae4a733699.png" />
+</div>
+</div>
+</section>
+<section id="drug-response-spatial-maps">
+<h3>Drug-response spatial maps<a class="headerlink" href="#drug-response-spatial-maps" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pharost.analysis.load_response_prediction</span></code> populates <code class="docutils literal notranslate"><span class="pre">adata.obs[{drug}]</span></code>
+from each drug’s <code class="docutils literal notranslate"><span class="pre">predicted_probabilities.csv</span></code>. The spatial plot then shows
+the probability distribution across the tissue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">load_response_prediction</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">drugs</span><span class="o">=</span><span class="n">selected_drugs</span><span class="p">,</span>
+    <span class="n">path_template</span><span class="o">=</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s1">/predicted_probabilities.csv&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">drug_cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
+    <span class="s1">&#39;pink_yellow_teal&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;#403939&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7f3e5&#39;</span><span class="p">,</span> <span class="s1">&#39;#EE781F&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">selected_drugs</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">drug_cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_label</span><span class="p">())</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&lt;colorbar&gt;&#39;</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures_BC/01_Spatial_drug_response.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7b7c477faa1d1310b6e5a242c66efe3b0dc970b56575bc44d85aa8d077ee65ab.png" src="_images/7b7c477faa1d1310b6e5a242c66efe3b0dc970b56575bc44d85aa8d077ee65ab.png" />
+</div>
+</div>
+</section>
+<section id="marker-gene-drug-response-dotplot">
+<h3>Marker-gene + drug-response dotplot<a class="headerlink" href="#marker-gene-drug-response-dotplot" title="Permalink to this heading"></a></h3>
+<p>Compare canonical breast-cancer markers (ERBB2, ESR1, PGR) against predicted
+drug responses in one dotplot, grouped by cell type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ERBB2&#39;</span><span class="p">,</span> <span class="s1">&#39;ESR1&#39;</span><span class="p">,</span> <span class="s1">&#39;PGR&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">selected_drugs</span>
+
+<span class="n">dot_cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
+    <span class="s2">&quot;blue_white_orange&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;#A0C5E3&quot;</span><span class="p">,</span> <span class="s2">&quot;#F7F8F0&quot;</span><span class="p">,</span> <span class="s2">&quot;#FCB55C&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">var_names</span><span class="o">=</span><span class="n">var_names</span><span class="p">,</span>
+    <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;celltype&#39;</span><span class="p">,</span>
+    <span class="n">categories_order</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">celltype_palette</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="n">standard_scale</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">dot_cmap</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures_BC/01_Drug_gene_dotplot_summary.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3f3d00ed165c3666373b1a68e878400e7328a4fb35a0c684e7ff70922d4a4e50.png" src="_images/3f3d00ed165c3666373b1a68e878400e7328a4fb35a0c684e7ff70922d4a4e50.png" />
+</div>
+</div>
+</section>
+<section id="sensitive-cell-proportion-per-cell-type">
+<h3>Sensitive-cell proportion per cell type<a class="headerlink" href="#sensitive-cell-proportion-per-cell-type" title="Permalink to this heading"></a></h3>
+<p>For each drug, plot the fraction of cells with predicted probability &gt; 0.5
+within each cell type. Highlights which populations the model considers
+sensitive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">plot_response_celltype_prop</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">target_drugs</span><span class="o">=</span><span class="n">selected_drugs</span><span class="p">,</span>
+    <span class="n">cell_type_col</span><span class="o">=</span><span class="s1">&#39;celltype&#39;</span><span class="p">,</span>
+    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
+    <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Figure saved to figures_BC/response_celltype_prop.pdf
+</pre></div>
+</div>
+<img alt="_images/8a4ab34b99a3f0bdbb8ef2eb0409f7cfe9d338c02c3d43ee1073627f4aacc006.png" src="_images/8a4ab34b99a3f0bdbb8ef2eb0409f7cfe9d338c02c3d43ee1073627f4aacc006.png" />
+</div>
+</div>
+</section>
+<section id="drug-gene-spearman-correlation">
+<h3>Drug × gene Spearman correlation<a class="headerlink" href="#drug-gene-spearman-correlation" title="Permalink to this heading"></a></h3>
+<p>Spearman correlation between every gene’s expression and each drug’s
+predicted score. The union of per-drug top genes is rendered as a clustered
+heatmap with diverging colors centered on zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_df</span> <span class="o">=</span> <span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">drug_gene_correlation</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">target_drugs</span><span class="o">=</span><span class="n">selected_drugs</span><span class="p">,</span>
+    <span class="n">n_top_genes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span>
+    <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5942cf97486e8f5ee06f0b72160f4f576b96787d30c01bbd057ba9fc724c1446.png" src="_images/5942cf97486e8f5ee06f0b72160f4f576b96787d30c01bbd057ba9fc724c1446.png" />
+</div>
+</div>
+</section>
+<section id="bivariate-spatial-coexpression-gene-drug">
+<h3>Bivariate spatial coexpression: gene × drug<a class="headerlink" href="#bivariate-spatial-coexpression-gene-drug" title="Permalink to this heading"></a></h3>
+<p>Each cell is colored by its <strong>joint</strong> bin in (gene expression, drug
+response). The 3×3 legend grid shows the bivariate color encoding —
+darkest corner = high in both axes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;ERBB2&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;LAPATINIB&#39;</span><span class="p">,</span>
+    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;KRT15&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;LAPATINIB&#39;</span><span class="p">,</span>
+    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0348fbd38a6972369350f1c153104aa20caa3fe96b58d0ff002ee74b96b3f3b7.png" src="_images/0348fbd38a6972369350f1c153104aa20caa3fe96b58d0ff002ee74b96b3f3b7.png" />
+<img alt="_images/c63f788e6c992d7ce15e6af6817673020eba598822114d82acd70a552d70e815.png" src="_images/c63f788e6c992d7ce15e6af6817673020eba598822114d82acd70a552d70e815.png" />
+</div>
+</div>
+</section>
+<section id="bivariate-spatial-coexpression-gene-gene">
+<h3>Bivariate spatial coexpression: gene × gene<a class="headerlink" href="#bivariate-spatial-coexpression-gene-gene" title="Permalink to this heading"></a></h3>
+<p>Same visualization scheme applied to two genes (ERBB2 vs KRT15). Useful for
+identifying cell populations that co-express two markers of interest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_gene</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> <span class="n">gene1</span><span class="o">=</span><span class="s1">&#39;ERBB2&#39;</span><span class="p">,</span> <span class="n">gene2</span><span class="o">=</span><span class="s1">&#39;KRT15&#39;</span><span class="p">,</span>
+    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_noCDAN&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/89e5d63b68649b7ab7fd07d3e261f4c4954f47ce80e1d8c74b31b81ebd82c2af.png" src="_images/89e5d63b68649b7ab7fd07d3e261f4c4954f47ce80e1d8c74b31b81ebd82c2af.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Environment Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Data.html" class="btn btn-neutral float-right" title="Datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Ruohan Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

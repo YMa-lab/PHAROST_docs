@@ -15,11 +15,13 @@ release = '0.1.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "myst_parser",
     "myst_nb",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
 ]
+
+# Disable notebook execution during build to avoid execution failures.
+nb_execution_mode = "off"
 
 templates_path = ['_templates']
 exclude_patterns = []
