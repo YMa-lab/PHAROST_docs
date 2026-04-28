@@ -26,7 +26,6 @@ User Guide
    :maxdepth: 2
 
    Data
-   TutorialBC
 
 API Reference
 -------------
