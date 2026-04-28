@@ -18,8 +18,6 @@ Getting Started
    installation
    
 
----
-
 User Guide
 ----------
 
@@ -28,8 +26,6 @@ User Guide
 
    Data
    TutorialBC
-
----
 
 API Reference
 -------------
