@@ -1,22 +1,26 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PHAROST API Reference &mdash; PHAROST 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=efff4d0f" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
 
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,6 +48,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Environment Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial1_BC.html">Tutorial 1 — Breast Cancer (Xenium Rep1)</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Data.html">Datasets</a></li>
@@ -98,7 +103,7 @@
            <div itemprop="articleBody">
              
   <section id="pharost-api-reference">
-<h1>PHAROST API Reference<a class="headerlink" href="#pharost-api-reference" title="Link to this heading"></a></h1>
+<h1>PHAROST API Reference<a class="headerlink" href="#pharost-api-reference" title="Permalink to this heading"></a></h1>
 <p>Public API surface of the <code class="docutils literal notranslate"><span class="pre">pharost</span></code> package. Import as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pharost</span>
 </pre></div>
@@ -111,9 +116,9 @@
 </ul>
 <hr class="docutils" />
 <section id="model-modules">
-<h2>Model Modules<a class="headerlink" href="#model-modules" title="Link to this heading"></a></h2>
+<h2>Model Modules<a class="headerlink" href="#model-modules" title="Permalink to this heading"></a></h2>
 <section id="pharost-train">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.train</span></code><a class="headerlink" href="#pharost-train" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.train</span></code><a class="headerlink" href="#pharost-train" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
     <span class="n">p_bulk_gene_exp</span><span class="p">,</span>
     <span class="n">p_bulk_label</span><span class="p">,</span>
@@ -217,7 +222,7 @@ probabilities to <code class="docutils literal notranslate"><span class="pre">ou
 </section>
 <hr class="docutils" />
 <section id="pharost-load-model">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.load_model</span></code><a class="headerlink" href="#pharost-load-model" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.load_model</span></code><a class="headerlink" href="#pharost-load-model" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -245,7 +250,7 @@ probabilities to <code class="docutils literal notranslate"><span class="pre">ou
 </section>
 <hr class="docutils" />
 <section id="pharost-predict">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.predict</span></code><a class="headerlink" href="#pharost-predict" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.predict</span></code><a class="headerlink" href="#pharost-predict" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
     <span class="n">model</span><span class="p">,</span>
     <span class="n">adata</span><span class="p">,</span>
@@ -298,11 +303,11 @@ ordered to match <code class="docutils literal notranslate"><span class="pre">ad
 </section>
 <hr class="docutils" />
 <section id="analysis-modules-pharost-analysis">
-<h2>Analysis Modules <code class="docutils literal notranslate"><span class="pre">pharost.analysis</span></code><a class="headerlink" href="#analysis-modules-pharost-analysis" title="Link to this heading"></a></h2>
+<h2>Analysis Modules <code class="docutils literal notranslate"><span class="pre">pharost.analysis</span></code><a class="headerlink" href="#analysis-modules-pharost-analysis" title="Permalink to this heading"></a></h2>
 <p>Downstream analyses. All functions assume <code class="docutils literal notranslate"><span class="pre">adata.obs[drug]</span></code> already contains
 predicted probabilities (use <code class="docutils literal notranslate"><span class="pre">load_response_prediction</span></code> to populate them).</p>
 <section id="pharost-analysis-load-response-prediction">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.load_response_prediction</span></code><a class="headerlink" href="#pharost-analysis-load-response-prediction" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.load_response_prediction</span></code><a class="headerlink" href="#pharost-analysis-load-response-prediction" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">load_response_prediction</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">drugs</span><span class="p">,</span>
@@ -356,7 +361,7 @@ predicted probabilities (use <code class="docutils literal notranslate"><span cl
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-plot-response-celltype-prop">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.plot_response_celltype_prop</span></code><a class="headerlink" href="#pharost-analysis-plot-response-celltype-prop" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.plot_response_celltype_prop</span></code><a class="headerlink" href="#pharost-analysis-plot-response-celltype-prop" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">plot_response_celltype_prop</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">target_drugs</span><span class="p">,</span>
@@ -374,7 +379,7 @@ cell type, faceted by drug. Cell types with fewer than 5 cells are dropped.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-drug-celltype-jsd">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.drug_celltype_jsd</span></code><a class="headerlink" href="#pharost-analysis-drug-celltype-jsd" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.drug_celltype_jsd</span></code><a class="headerlink" href="#pharost-analysis-drug-celltype-jsd" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">drug_celltype_jsd</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">drug</span><span class="p">,</span>
@@ -403,7 +408,7 @@ cell-type-specific response distributions, drawn as a clustermap.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-drug-drug-jsd-grid">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.drug_drug_jsd_grid</span></code><a class="headerlink" href="#pharost-analysis-drug-drug-jsd-grid" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.drug_drug_jsd_grid</span></code><a class="headerlink" href="#pharost-analysis-drug-drug-jsd-grid" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">drug_drug_jsd_grid</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">drug_list</span><span class="p">,</span>
@@ -431,7 +436,7 @@ that cell type, plotted as a grid of heatmaps.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-drug-gene-correlation">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.drug_gene_correlation</span></code><a class="headerlink" href="#pharost-analysis-drug-gene-correlation" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.drug_gene_correlation</span></code><a class="headerlink" href="#pharost-analysis-drug-gene-correlation" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">drug_gene_correlation</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">target_drugs</span><span class="p">,</span>
@@ -453,7 +458,7 @@ the union.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-plot-single-drug-gene-correlation">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.plot_single_drug_gene_correlation</span></code><a class="headerlink" href="#pharost-analysis-plot-single-drug-gene-correlation" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.plot_single_drug_gene_correlation</span></code><a class="headerlink" href="#pharost-analysis-plot-single-drug-gene-correlation" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">plot_single_drug_gene_correlation</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">gene</span><span class="p">,</span>
@@ -471,7 +476,7 @@ the union.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-bivariate-gene-drug">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.bivariate_gene_drug</span></code><a class="headerlink" href="#pharost-analysis-bivariate-gene-drug" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.bivariate_gene_drug</span></code><a class="headerlink" href="#pharost-analysis-bivariate-gene-drug" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">gene</span><span class="p">,</span>
@@ -491,7 +496,7 @@ drug_response) bin, with a 2D legend grid.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-bivariate-gene-gene">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.bivariate_gene_gene</span></code><a class="headerlink" href="#pharost-analysis-bivariate-gene-gene" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.bivariate_gene_gene</span></code><a class="headerlink" href="#pharost-analysis-bivariate-gene-gene" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_gene</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">gene1</span><span class="p">,</span>
@@ -511,7 +516,7 @@ drug_response) bin, with a 2D legend grid.</p>
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-sensitive-resistant-de">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.sensitive_resistant_DE</span></code><a class="headerlink" href="#pharost-analysis-sensitive-resistant-de" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.sensitive_resistant_DE</span></code><a class="headerlink" href="#pharost-analysis-sensitive-resistant-de" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">sensitive_resistant_DE</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">drug</span><span class="p">,</span>
@@ -529,7 +534,7 @@ cells for one drug, using <code class="docutils literal notranslate"><span class
 </section>
 <hr class="docutils" />
 <section id="pharost-analysis-gsea-analysis">
-<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.gsea_analysis</span></code><a class="headerlink" href="#pharost-analysis-gsea-analysis" title="Link to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pharost.analysis.gsea_analysis</span></code><a class="headerlink" href="#pharost-analysis-gsea-analysis" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">gsea_analysis</span><span class="p">(</span>
     <span class="n">adata</span><span class="p">,</span>
     <span class="n">target_drugs</span><span class="p">,</span>

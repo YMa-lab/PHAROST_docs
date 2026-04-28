@@ -16,6 +16,7 @@ Getting Started
    :maxdepth: 2
 
    installation
+   Tutorial1_BC
    
 
 User Guide
@@ -25,7 +26,6 @@ User Guide
    :maxdepth: 2
 
    Data
-   TutorialBC
 
 API Reference
 -------------
