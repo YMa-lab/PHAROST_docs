@@ -13,8 +13,7 @@ The package exposes three layers:
 - **`pharost.model.*`**: lower-level neural network components (for advanced use).
 
 ---
-
-## Top-level
+## Model Modules
 
 ### `pharost.train`
 
@@ -120,8 +119,7 @@ Run inference on spatial cells using a trained model.
 ordered to match `adata.obs`.
 
 ---
-
-## `pharost.analysis`
+## Analysis Modules `pharost.analysis`
 
 Downstream analyses. All functions assume `adata.obs[drug]` already contains
 predicted probabilities (use `load_response_prediction` to populate them).
