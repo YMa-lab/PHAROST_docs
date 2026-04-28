@@ -16,6 +16,7 @@ Getting Started
    :maxdepth: 2
 
    installation
+   Tutorial1_BC
    
 
 User Guide
