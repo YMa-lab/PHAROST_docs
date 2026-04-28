@@ -43,12 +43,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Environment Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-pytorch-geometric">Install PyTorch Geometric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-compatibility">Version Compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-jupyter-notebook-support">Optional: Jupyter Notebook Support</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environment Setup</a></li>
 </ul>
 
         </div>
@@ -88,23 +83,17 @@ conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> <
 conda<span class="w"> </span>activate<span class="w"> </span>PHAROST_env
 </pre></div>
 </div>
-<section id="install-pytorch-geometric">
-<h2>Install PyTorch Geometric<a class="headerlink" href="#install-pytorch-geometric" title="Link to this heading"></a></h2>
-<p>The PyG companion libraries are already declared in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> and installed
-by <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span></code>. If you ever need to reinstall them manually:</p>
+<p><em><strong>Install PyTorch Geometric</strong></em></p>
+<p>The PyG companion libraries are already declared in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> and installed by <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span></code>. If you ever need to reinstall them manually:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>torch-scatter<span class="w"> </span>torch-sparse<span class="w"> </span>torch-cluster<span class="w"> </span>torch-spline-conv<span class="w"> </span>torch-geometric<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-f<span class="w"> </span>https://data.pyg.org/whl/torch-2.8.0+cu128.html
 </pre></div>
 </div>
-</section>
-<section id="version-compatibility">
-<h2>Version Compatibility<a class="headerlink" href="#version-compatibility" title="Link to this heading"></a></h2>
+<p><em><strong>Version Compatibility</strong></em></p>
 <p><code class="docutils literal notranslate"><span class="pre">torch_scatter</span></code>, <code class="docutils literal notranslate"><span class="pre">torch_sparse</span></code>, <code class="docutils literal notranslate"><span class="pre">torch_cluster</span></code>, and <code class="docutils literal notranslate"><span class="pre">torch_spline_conv</span></code> ship as
-<strong>precompiled C extensions</strong> that must match the installed PyTorch ABI exactly.
-The pinned versions in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> target <strong>PyTorch 2.8 + CUDA 12.8</strong>
-(note the <code class="docutils literal notranslate"><span class="pre">+pt28cu128</span></code> suffix on the wheel filenames).</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">torch</span></code> is later upgraded (e.g., to 2.10), <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">torch_geometric</span></code> will
-<strong>segfault</strong> with no helpful error message. To verify versions are aligned:</p>
+precompiled C extensions that must match the installed PyTorch ABI exactly.
+The pinned versions in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> target <strong>PyTorch 2.8 + CUDA 12.8</strong> (note the <code class="docutils literal notranslate"><span class="pre">+pt28cu128</span></code> suffix on the wheel filenames).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">torch</span></code> is later upgraded (e.g., to 2.10), <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">torch_geometric</span></code> will segfault with no helpful error message. To verify versions are aligned:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch; print(torch.__version__, torch.version.cuda)&quot;</span>
 pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^torch_(scatter|sparse|cluster|spline)&quot;</span>
 <span class="c1"># Expect: torch 2.8.x / cuda 12.8 / companion libs all &#39;+pt28cu128&#39;</span>
@@ -115,17 +104,13 @@ pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><
 <span class="w">  </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu128
 </pre></div>
 </div>
-<p>or reinstall the PyG companion libs against your current torch version using the
-matching index from <a class="reference external" href="https://data.pyg.org/whl/">https://data.pyg.org/whl/</a>.</p>
-</section>
-<section id="optional-jupyter-notebook-support">
-<h2>Optional: Jupyter Notebook Support<a class="headerlink" href="#optional-jupyter-notebook-support" title="Link to this heading"></a></h2>
+<p>or reinstall the PyG companion libs against your current torch version using the matching index from <a class="reference external" href="https://data.pyg.org/whl/">https://data.pyg.org/whl/</a>.</p>
+<p><em><strong>Optional: Jupyter Notebook Support</strong></em></p>
 <p>If you plan to use Jupyter notebooks:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>anaconda<span class="w"> </span>ipykernel
 python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>PHAROST_env
 </pre></div>
 </div>
-</section>
 </section>
 
 
