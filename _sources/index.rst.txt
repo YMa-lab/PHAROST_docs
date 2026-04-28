@@ -1,4 +1,4 @@
-PHAROST Documentation
+Welcome to PHAROST Documentation
 =====================
 
 PHAROST is a deep transfer learning framework for pharmacogenomic outcome prediction in spatial transcriptomics.
@@ -6,8 +6,7 @@ PHAROST is a deep transfer learning framework for pharmacogenomic outcome predic
 .. image:: _static/Fig1.png
    :align: center
    :width: 700
-
----
+   
 
 Getting Started
 ---------------
@@ -16,16 +15,9 @@ Getting Started
    :maxdepth: 2
 
    installation
-   Tutorial1_BC
-   
-
-User Guide
-----------
-
-.. toctree::
-   :maxdepth: 2
-
    Data
+   Tutorial1_BC
+   Tutorial2_NSCLC
 
 API Reference
 -------------
@@ -39,8 +31,7 @@ API Reference
 
 Citation
 --------
-
 .. toctree::
    :maxdepth: 1
 
-   citation
+   Ruohan Wang, Filipe LF. Carvalho, Ying Ma#. Cell-resolved spatial pharmacogenomics maps tissue landscapes of drug response.
