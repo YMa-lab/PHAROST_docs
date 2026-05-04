@@ -63,8 +63,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#marker-gene-drug-response-dotplot">Marker-gene + drug-response dotplot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sensitive-cell-proportion-per-cell-type">Sensitive-cell proportion per cell type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#drug-gene-spearman-correlation">Drug × gene Spearman correlation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bivariate-spatial-coexpression-gene-drug">Bivariate spatial coexpression: gene × drug</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bivariate-spatial-coexpression-gene-gene">Bivariate spatial coexpression: gene × gene</a></li>
 </ul>
 </li>
 </ul>
@@ -374,49 +372,6 @@ heatmap with diverging colors centered on zero.</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/5942cf97486e8f5ee06f0b72160f4f576b96787d30c01bbd057ba9fc724c1446.png" src="_images/5942cf97486e8f5ee06f0b72160f4f576b96787d30c01bbd057ba9fc724c1446.png" />
-</div>
-</div>
-</section>
-<section id="bivariate-spatial-coexpression-gene-drug">
-<h3>Bivariate spatial coexpression: gene × drug<a class="headerlink" href="#bivariate-spatial-coexpression-gene-drug" title="Permalink to this heading"></a></h3>
-<p>Each cell is colored by its <strong>joint</strong> bin in (gene expression, drug
-response). The 3×3 legend grid shows the bivariate color encoding —
-darkest corner = high in both axes.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;ERBB2&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;LAPATINIB&#39;</span><span class="p">,</span>
-    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;KRT15&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;LAPATINIB&#39;</span><span class="p">,</span>
-    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_BC&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0348fbd38a6972369350f1c153104aa20caa3fe96b58d0ff002ee74b96b3f3b7.png" src="_images/0348fbd38a6972369350f1c153104aa20caa3fe96b58d0ff002ee74b96b3f3b7.png" />
-<img alt="_images/c63f788e6c992d7ce15e6af6817673020eba598822114d82acd70a552d70e815.png" src="_images/c63f788e6c992d7ce15e6af6817673020eba598822114d82acd70a552d70e815.png" />
-</div>
-</div>
-</section>
-<section id="bivariate-spatial-coexpression-gene-gene">
-<h3>Bivariate spatial coexpression: gene × gene<a class="headerlink" href="#bivariate-spatial-coexpression-gene-gene" title="Permalink to this heading"></a></h3>
-<p>Same visualization scheme applied to two genes (ERBB2 vs KRT15). Useful for
-identifying cell populations that co-express two markers of interest.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_gene</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">gene1</span><span class="o">=</span><span class="s1">&#39;ERBB2&#39;</span><span class="p">,</span> <span class="n">gene2</span><span class="o">=</span><span class="s1">&#39;KRT15&#39;</span><span class="p">,</span>
-    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_noCDAN&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/89e5d63b68649b7ab7fd07d3e261f4c4954f47ce80e1d8c74b31b81ebd82c2af.png" src="_images/89e5d63b68649b7ab7fd07d3e261f4c4954f47ce80e1d8c74b31b81ebd82c2af.png" />
 </div>
 </div>
 </section>

@@ -63,7 +63,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#drug-response-spatial-maps">Drug-response spatial maps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#marker-gene-drug-response-dotplot">Marker-gene + drug-response dotplot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sensitive-cell-proportion-per-cell-type">Sensitive-cell proportion per cell type</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bivariate-spatial-coexpression-gene-drug">Bivariate spatial coexpression: gene × drug</a></li>
 </ul>
 </li>
 </ul>
@@ -337,48 +336,6 @@ sensitive.</p>
 </pre></div>
 </div>
 <img alt="_images/703a39d5efd4c673195f5c62555266b7c1221c58d7751640db9e526d3cdfe6a9.png" src="_images/703a39d5efd4c673195f5c62555266b7c1221c58d7751640db9e526d3cdfe6a9.png" />
-</div>
-</div>
-</section>
-<section id="bivariate-spatial-coexpression-gene-drug">
-<h3>Bivariate spatial coexpression: gene × drug<a class="headerlink" href="#bivariate-spatial-coexpression-gene-drug" title="Permalink to this heading"></a></h3>
-<p>Each cell is colored by its <strong>joint</strong> bin in (gene expression, drug
-response). The 3×3 legend grid shows the bivariate color encoding —
-darkest corner = high in both axes.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bivariate_color</span> <span class="o">=</span>  <span class="p">[</span>
-        <span class="s1">&#39;#e8e8e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#b8d6be&#39;</span><span class="p">,</span> <span class="s1">&#39;#69a767&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;#ace4e4&#39;</span><span class="p">,</span> <span class="s1">&#39;#3f5b5c&#39;</span><span class="p">,</span> <span class="s1">&#39;#5a9178&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;#5ac8c8&#39;</span><span class="p">,</span> <span class="s1">&#39;#5698b9&#39;</span><span class="p">,</span> <span class="s1">&#39;#1c2828&#39;</span>
-    <span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;EGFR&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;GEFITINIB&#39;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">bivariate_color</span><span class="p">,</span>
-    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">spot_size</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_NSCLC&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;EGFR&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;OSIMERTINIB&#39;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">bivariate_color</span><span class="p">,</span>
-    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">spot_size</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_NSCLC&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">pharost</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">bivariate_gene_drug</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">gene</span><span class="o">=</span><span class="s1">&#39;MET&#39;</span><span class="p">,</span> <span class="n">drug</span><span class="o">=</span><span class="s1">&#39;CRIZOTINIB&#39;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">bivariate_color</span><span class="p">,</span>
-    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">spot_size</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;figures_NSCLC&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/83b4f4ab8628f71f3e79cdedf205118640d4767c8a0a401143b984be63f4768f.png" src="_images/83b4f4ab8628f71f3e79cdedf205118640d4767c8a0a401143b984be63f4768f.png" />
-<img alt="_images/2cbba8d37ff1637840f6d0a6c2c6f2b1522104ad8fc8f94d84684e38376e5d03.png" src="_images/2cbba8d37ff1637840f6d0a6c2c6f2b1522104ad8fc8f94d84684e38376e5d03.png" />
-<img alt="_images/85a7c204fc5690782d4b29ca305f709e33f8adc3a1c6565862dcdf08f2552d3a.png" src="_images/85a7c204fc5690782d4b29ca305f709e33f8adc3a1c6565862dcdf08f2552d3a.png" />
 </div>
 </div>
 </section>
